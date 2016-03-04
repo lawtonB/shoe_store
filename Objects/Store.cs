@@ -72,6 +72,32 @@ namespace ShoeStore
      return allStores;
     }
 
+    public void AddBrand(Brand newBrand)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@StoreId, @BrandId);", conn);
+
+      SqlParameter brandIdParameter = new SqlParameter();
+      brandIdParameter.ParameterName = "@BrandId";
+      brandIdParameter.Value = newBrand.GetId();
+
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(brandIdParameter);
+      cmd.Parameters.Add(storeIdParameter);
+
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public List<Brand> GetBrands()
     {
       SqlConnection conn = DB.Connection();
@@ -95,7 +121,7 @@ namespace ShoeStore
          int brandId = rdr.GetInt32(0);
          string brandName = rdr.GetString(1);
          Brand newBrand = new Brand(brandName, brandId);
-         Brand.Add(newBrand);
+         brands.Add(newBrand);
        }
        if (rdr != null)
       {
@@ -108,30 +134,7 @@ namespace ShoeStore
       return brands;
       }
 
-    public void AddBrand(Brand newBrand)
-    {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@StoreId, @BrandId);", conn);
-
-      SqlParameter brandIdParameter = new SqlParameter();
-      brandIdParameter.ParameterName = "@BrandId";
-      brandIdParameter.Value = newBrand.GetId();
-
-      SqlParameter storeIdParameter = new SqlParameter();
-      storeIdParameter.ParameterName = "@StoreId";
-      storeIdParameter.Value = this.GetId();
-
-      cmd.Parameters.Add(brandIdParameter);
-      cmd.Parameters.Add(storeIdParameter);
-
-      cmd.ExecuteNonQuery();
-      if (conn != null)
-      {
-        conn.Close();
-      }
-    }
 
     public static void DeleteAll()
     {
