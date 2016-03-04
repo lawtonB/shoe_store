@@ -50,11 +50,28 @@ namespace ShoeStore
         model.Add("brands", Brandstores);
         return View["stores_brands.cshtml", model];
       };
+      Get["store/add/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Store newStore = Store.Find(parameters.id);
+        List<Brand> allBrands = Brand.GetAll();
+        model.Add("store", newStore);
+        model.Add("brands", allBrands);
+        return View["add_store.cshtml"];
+      };
+      Get["brand/add/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Brand newBrand = Brand.Find(parameters.id);
+        List<Store> allstores = Store.GetAll();
+        model.Add("store", newBrand);
+        model.Add("brands", allstores);
+        return View["add_brand.cshtml"];
+      };
+
 
 
       Delete["/store/delete/{id}"] = parameters => {
         Store newStore = Store.Find(parameters.id);
-        newStore.DeleteAll();
+        newStore.Delete();
         List<Store> allStores = Store.GetAll();
         return View["stores.cshtml", allStores];
       };
