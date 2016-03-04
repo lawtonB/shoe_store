@@ -21,6 +21,27 @@ namespace ShoeStore
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_Equal_ReturnsTrueForSameName()
+    {
+      Store firstStore = new Store("Nike");
+      Store secondStore = new Store("Nike");
+
+      Assert.Equal(firstStore, secondStore);
+    }
+
+    [Fact]
+    public void Test_Save_SavesStoreToDatabase()
+    {
+      Store testStore = new Store("Nike");
+      testStore.Save();
+
+      List<Store> result = Store.GetAll();
+      List<Store> testlist = new List<Store>{testStore};
+
+      Assert.Equal(testlist, result);
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
