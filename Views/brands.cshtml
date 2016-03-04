@@ -1,0 +1,22 @@
+@if (@Model.Count == 0)
+{
+  <p>No brands added yet</p>
+}
+
+<ul>
+  @foreach (var store in @Model)
+  {
+    <li>
+      <a href="/brands/@brand.GetId()">@brand.GetName()</a>
+      <a href="/brands/add/@brand.GetId()">Add</a>
+    </li>
+  }
+</ul>
+<br>
+<a href="/">Home</a>
+<br>
+<form class="store" action="brands/new" method="post">
+  <label for="name">name</label>
+  <input id="store-name" type="text" name="store-name">
+  <button type="submit">add store</button>
+</form>
