@@ -1,0 +1,23 @@
+<h1>Add @Model["brand"].GetName() to a Brand</h1>
+@if (@Model["stores"].Count == 0)
+{
+  <p>There are no added brands.</p>
+}
+else
+{
+  <form action='/store/add/@Model["brand"].GetId()' method="post">
+    <label for="id">Store:</label>
+    <select name="id">
+      @foreach (var store in @Model["stores"])
+      {
+        <option value='@store.GetId()'>@store.GetName()</option>
+      }
+    </select>
+    <br>
+    <button type="submit">Add to store</button>
+  </form>
+}
+<br>
+<h4><a href="/">Return Home</a></h4>
+<h4><a href="/brands">Return to brands</a></h4>
+<h4><a href="/stores">View stores</a></h4>

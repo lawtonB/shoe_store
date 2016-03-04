@@ -4,7 +4,7 @@
 }
 
 <ul>
-  @foreach (var store in @Model)
+  @foreach (var brand in @Model)
   {
     <li>
       <a href="/brands/@brand.GetId()">@brand.GetName()</a>
@@ -13,10 +13,11 @@
   }
 </ul>
 <br>
-<a href="/">Home</a>
-<br>
 <form class="store" action="brands/new" method="post">
   <label for="name">name</label>
   <input id="store-name" type="text" name="store-name">
   <button type="submit">add store</button>
 </form>
+<br>
+<a href="/">Home</a>
+<br>
