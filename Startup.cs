@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ShoeStoreNameSpace
+namespace ShoeStore
 {
   public class Startup
   {

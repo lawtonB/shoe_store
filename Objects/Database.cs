@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ShoeStoreNameSpace
+namespace ShoeStore
 {
   public class DB
   {
