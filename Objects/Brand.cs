@@ -72,6 +72,31 @@ namespace ShoeStore
      return allBrands;
     }
 
+    public void addStore(Store newStore)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@StoreId, @BrandId)", conn);
+
+      SqlParameter brandIdParameter = new SqlParameter();
+      brandIdParameter.ParameterName = "@BrandId";
+      brandIdParameter.Value = newStore.GetId();
+
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(brandIdParameter);
+      cmd.Parameters.Add(storeIdParameter);
+
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();

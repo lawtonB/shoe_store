@@ -58,7 +58,7 @@ namespace ShoeStore
       List<Brand> savedBrands = testStore.GetBrands();
       List<Brand> testlist = new List<Brand>{firstBrand};
 
-      Assert.Equal(testlist, savedBrands)
+      Assert.Equal(testlist, savedBrands);
     }
 
     [Fact]
