@@ -72,6 +72,42 @@ namespace ShoeStore
      return allStores;
     }
 
+    public List<Brand> GetBrands()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      List<Brand> brands = new List<Brand>{};
+
+      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE stores.id = @StoreId;", conn);
+
+       SqlParameter storeIdParameter = new SqlParameter();
+       storeIdParameter.ParameterName = "@StoreId";
+       storeIdParameter.Value = this.GetId();
+
+       cmd.Parameters.Add(storeIdParameter);
+
+       rdr = cmd.ExecuteReader();
+
+       while (rdr.Read())
+       {
+         int brandId = rdr.GetInt32(0);
+         string brandName = rdr.GetString(1);
+         Brand newBrand = new Brand(brandName, brandId);
+         Brand.Add(newBrand);
+       }
+       if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return brands;
+      }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
