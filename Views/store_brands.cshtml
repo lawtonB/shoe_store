@@ -1,0 +1,19 @@
+<h2>@Model["stores"].GetStore_Name()'s brands</h2>
+@if (@Model["stores"].Count == 0)
+{
+  <p>this story carries no brands</p>
+}
+else
+{
+  <ol>
+    @foreach (var brand in @Model["brands"])
+    {
+      <li>
+        @brand.GetBrand_Name()
+      </li>
+    }
+  </ol>
+}
+<h4><a href="/">Return Home</a></h4>
+<h4><a href="/brands">Return to Brands</a></h4>
+<h4><a href="/stores">View Stores</a></h4>

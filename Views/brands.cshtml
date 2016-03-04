@@ -7,7 +7,7 @@
   @foreach (var brand in @Model)
   {
     <li>
-      <a href="/brands/@brand.GetId()">@brand.GetName()</a>
+      <a href="/brands/@brand.GetId()">@brand.GetBrand_Name()</a>
       <a href="/brands/add/@brand.GetId()">Add</a>
     </li>
   }
