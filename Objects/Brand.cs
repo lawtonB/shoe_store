@@ -97,6 +97,45 @@ namespace ShoeStore
       }
     }
 
+    public List<Store> GetStores()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      List<Store> stores = new List<Store>{};
+
+      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN stores_brands ON (brands.id = stores_brands.brand_id) JOIN stores on (stores.id = stores_brands.store_id) WHERE brands.id = @BrandId", conn);
+
+      SqlParameter brandIdParameter = new SqlParameter();
+      brandIdParameter.ParameterName = "@brandId";
+      brandIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(brandIdParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        int StoreId = rdr.GetInt32(0);
+        string storeName = rdr.GetString(1);
+        Store newstore = new Store(storeName, StoreId);
+        stores.Add(newstore);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return stores;
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();
