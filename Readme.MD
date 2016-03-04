@@ -1,3 +1,8 @@
+Shoe Store
+
+This project demonstrates basic mastery of SQL commands and RESTfull routing
+
+the project allows the user to create a brand and a store on webpage, then view all brands present within the store and all stores which carry the relevant brands
 
 In SQLCMD
 CREATE DATABASE shoe_stores
