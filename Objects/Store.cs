@@ -106,7 +106,62 @@ namespace ShoeStore
       {
         conn.Close();
       }
+    }
 
+    public void Update(string newStoreName)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE stores SET store_name = @newStoreName OUTPUT INSERTED.store_name WHERE id = @StoreId;", conn);
+
+      SqlParameter newStoreParameter = new SqlParameter();
+      newStoreParameter.ParameterName = "@NewStoreName";
+      newStoreParameter.Value = newStoreName;
+
+      SqlParameter StoreIdParameter = new SqlParameter();
+      StoreIdParameter.ParameterName = "@StoreId";
+      StoreIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(newStoreParameter);
+      cmd.Parameters.Add(StoreIdParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._store_name = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+      public void Delete()
+      {
+        SqlConnection conn = DB.Connection();
+        conn.Open();
+
+        SqlCommand cmd = new SqlCommand("DELETE from stores WHERE id = @StoreId;", conn);
+
+        SqlParameter storeIdParameter = new SqlParameter();
+        storeIdParameter.ParameterName = "@StoreId";
+        storeIdParameter.Value = this.GetId();
+
+        cmd.Parameters.Add(storeIdParameter);
+        cmd.ExecuteNonQuery();
+        if (conn != null)
+        {
+          conn.Close();
+        }
+      }
     }
   }
-}

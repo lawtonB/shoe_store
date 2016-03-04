@@ -42,6 +42,41 @@ namespace ShoeStore
       Assert.Equal(testlist, result);
     }
 
+    [Fact]
+    public void Test_Save_AssignsIdToStoreObject()
+    {
+      //Arrange
+      Store testStore = new Store("Nike");
+      testStore.Save();
+
+      //Act
+      Store savedStore = Store.GetAll()[0];
+
+      int result = savedStore.GetId();
+      int testId = testStore.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
+
+    [Fact]
+    public void Test_Update_UpdatesStoreInDatabase()
+    {
+      //Arrange
+      string StoreName = "Nike";
+      Store testStore = new Store(StoreName);
+      testStore.Save();
+      string newStoreName = "Adidas";
+
+      //Act
+      testStore.Update(newStoreName);
+
+      string result = testStore.GetStore_Name();
+
+      //Assert
+      Assert.Equal(newStoreName, result);
+    }
+
     public void Dispose()
     {
       Store.DeleteAll();
