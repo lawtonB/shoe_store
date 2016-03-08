@@ -72,12 +72,12 @@ namespace ShoeStore
      return allBrands;
     }
 
-    public void addStore(Store newStore)
+    public void AddStore(Store newStore)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@StoreId, @BrandId)", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO brands_stores (store_id, brand_id) VALUES (@StoreId, @BrandId)", conn);
 
       SqlParameter brandIdParameter = new SqlParameter();
       brandIdParameter.ParameterName = "@BrandId";
@@ -105,7 +105,7 @@ namespace ShoeStore
 
       List<Store> stores = new List<Store>{};
 
-      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN stores_brands ON (brands.id = stores_brands.brand_id) JOIN stores on (stores.id = stores_brands.store_id) WHERE brands.id = @BrandId", conn);
+      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM brands JOIN brands_stores ON (brands.id = brands_stores.brand_id) JOIN stores on (stores.id = brands_stores.store_id) WHERE brands.id = @BrandId", conn);
 
       SqlParameter brandIdParameter = new SqlParameter();
       brandIdParameter.ParameterName = "@brandId";
@@ -118,9 +118,9 @@ namespace ShoeStore
       while (rdr.Read())
       {
         int StoreId = rdr.GetInt32(0);
-        string storeName = rdr.GetString(1);
-        Store newstore = new Store(storeName, StoreId);
-        stores.Add(newstore);
+        string StoreName = rdr.GetString(1);
+        Store NewStore = new Store(StoreName, StoreId);
+        stores.Add(NewStore);
       }
 
       if (rdr != null)

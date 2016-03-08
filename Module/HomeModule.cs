@@ -61,7 +61,7 @@ namespace ShoeStore
       Post["store/add/{id}"] = parameters => {
         Store newStore = Store.Find(parameters.id);
         Brand newBrand = Brand.Find(Request.Form["id"]);
-        newBrand.addStore(newStore);
+        newBrand.AddStore(newStore);
         List<Store> allStores = Store.GetAll();
         return View["stores.cshtml", allStores];
       };

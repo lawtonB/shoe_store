@@ -51,7 +51,7 @@ namespace ShoeStore
       Store testStore = new Store("adidas");
       testStore.Save();
 
-      testBrand.addStore(testStore);
+      testBrand.AddStore(testStore);
 
       List<Store> result = testBrand.GetStores();
       List<Store> testlist = new List<Store>{testStore};
@@ -71,8 +71,8 @@ namespace ShoeStore
       Store testStore1 = new Store("adidas");
       testStore1.Save();
 
-      testBrand.addStore(testStore);
-      testBrand.addStore(testStore1);
+      testBrand.AddStore(testStore);
+      testBrand.AddStore(testStore1);
 
       List<Store> result = testBrand.GetStores();
       List<Store> testlist = new List<Store>{testStore, testStore1};
