@@ -43,6 +43,17 @@ namespace ShoeStore
     }
 
     [Fact]
+    public void Test_Find_FindsBrandInDatabase()
+    {
+      Brand testBrand = new Brand("Puma");
+      testBrand.Save();
+
+      Brand foundBrand = Brand.Find(testBrand.GetId());
+
+      Assert.Equal(testBrand, foundBrand);
+    }
+
+    [Fact]
     public void Test_AddStore_AddstoreToBrand()
     {
       Brand testBrand = new Brand("Puma");
