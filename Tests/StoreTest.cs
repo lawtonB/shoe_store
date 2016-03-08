@@ -43,6 +43,30 @@ namespace ShoeStore
     }
 
     [Fact]
+     public void Test_AddBrand_AddsBrandToStore()
+     {
+       //Arrange
+       Store testStore = new Store("Target");
+       testStore.Save();
+
+       Brand testBrand = new Brand("Nike");
+       testBrand.Save();
+
+       Brand testBrand2 = new Brand("Adidas");
+       testBrand2.Save();
+
+       //Act
+       testStore.AddBrand(testBrand);
+       testStore.AddBrand(testBrand2);
+
+       List<Brand> result = testStore.GetBrands();
+       List<Brand> testList = new List<Brand>{testBrand, testBrand2};
+
+       //Assert
+       Assert.Equal(testList, result);
+     }
+
+    [Fact]
     public void Test_GetBrands_ReturnsAllStoreBrands()
     {
       Store testStore = new Store("Nike");

@@ -81,11 +81,11 @@ namespace ShoeStore
 
       SqlParameter brandIdParameter = new SqlParameter();
       brandIdParameter.ParameterName = "@BrandId";
-      brandIdParameter.Value = newStore.GetId();
+      brandIdParameter.Value = this.GetId();
 
       SqlParameter storeIdParameter = new SqlParameter();
       storeIdParameter.ParameterName = "@StoreId";
-      storeIdParameter.Value = this.GetId();
+      storeIdParameter.Value = newStore.GetId();
 
       cmd.Parameters.Add(brandIdParameter);
       cmd.Parameters.Add(storeIdParameter);

@@ -43,6 +43,45 @@ namespace ShoeStore
     }
 
     [Fact]
+    public void Test_AddStore_AddstoreToBrand()
+    {
+      Brand testBrand = new Brand("Puma");
+      testBrand.Save();
+
+      Store testStore = new Store("adidas");
+      testStore.Save();
+
+      testBrand.addStore(testStore);
+
+      List<Store> result = testBrand.GetStores();
+      List<Store> testlist = new List<Store>{testStore};
+
+      Assert.Equal(testlist, result);
+    }
+
+    [Fact]
+    public void Test_GetStores_ReturnsAllBrandStores()
+    {
+      Brand testBrand = new Brand("Puma");
+      testBrand.Save();
+
+      Store testStore = new Store("adidas");
+      testStore.Save();
+
+      Store testStore1 = new Store("adidas");
+      testStore1.Save();
+
+      testBrand.addStore(testStore);
+      testBrand.addStore(testStore1);
+
+      List<Store> result = testBrand.GetStores();
+      List<Store> testlist = new List<Store>{testStore, testStore1};
+
+      Assert.Equal(testlist, result);
+    }
+
+
+    [Fact]
     public void Test_Save_AssignsIdToBrandObject()
     {
       //Arrange
