@@ -10,7 +10,7 @@ else
     <select name="id">
       @foreach (var store in @Model["stores"])
       {
-        <option value='@store.GetId()'>@store.GetName()</option>
+        <option value='@store.GetId()'>@store.GetStore_Name()</option>
       }
     </select>
     <br>

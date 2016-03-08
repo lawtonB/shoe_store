@@ -1,7 +1,8 @@
 <p>Change @Model.GetStore_Name()</p>
-<form action="stores/edit/@store.GetId()" method="post">
+<form action="/stores/edit/@Model.GetId()" method="post">
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="store-id" value="@Model.GetId()">
+    <label for="store-name">new store name</label>
     <input id="store-name" type="text" name="store-name">
     <button type="submit" name="button">submit</button>
 </form>
