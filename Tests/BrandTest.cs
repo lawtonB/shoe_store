@@ -61,7 +61,7 @@ namespace ShoeStore
 
     public void Dispose()
     {
-      // Store.DeleteAll();
+      Store.DeleteAll();
       Brand.DeleteAll();
     }
   }
